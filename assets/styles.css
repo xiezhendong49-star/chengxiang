@@ -636,7 +636,7 @@ a {
   width: min(1200px, 100%);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 0.95fr 1.05fr;
+  grid-template-columns: 0.7fr 1.55fr;
   gap: 42px;
   align-items: center;
 }
@@ -1089,10 +1089,10 @@ h2 {
 }
 
 .feature-media {
-  background: var(--white);
+  /* background: var(--white); */
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: var(--shadow);
+  /* box-shadow: var(--shadow); */
 }
 
 .feature-list {
