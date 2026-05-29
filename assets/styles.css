@@ -1121,6 +1121,7 @@ h2 {
 
 .news-card {
   min-height: 238px;
+  cursor: pointer;
 }
 
 .news-meta {
