@@ -25,12 +25,13 @@ html {
 #booklet,
 #business-contact {
   scroll-margin-top: 96px;
+  padding-top: 42px;
 }
 
 body {
   margin: 0;
   color: var(--ink);
-  font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+  font-family: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
   background: var(--white);
   line-height: 1.65;
 }
@@ -115,7 +116,7 @@ a {
 }
 
 .has-dropdown::after {
-  content: "";
+  content: '';
   position: absolute;
   left: -12px;
   right: -12px;
@@ -139,7 +140,9 @@ a {
   opacity: 0;
   pointer-events: none;
   transform: translate(-50%, 8px);
-  transition: opacity 0.18s ease, transform 0.18s ease;
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease;
 }
 
 .nav-dropdown a {
@@ -161,7 +164,6 @@ a {
 .has-dropdown.open .nav-dropdown {
   opacity: 1;
   pointer-events: auto;
-  transform: translate(-50%, 0);
 }
 
 .nav-cta {
@@ -191,8 +193,13 @@ a {
 .hero {
   min-height: 680px;
   background:
-    linear-gradient(90deg, rgba(246, 248, 247, 0.94), rgba(255, 255, 255, 0.78) 46%, rgba(255, 255, 255, 0.14)),
-    url("./images/products/appliances.png") right center / auto 82% no-repeat,
+    linear-gradient(
+      90deg,
+      rgba(246, 248, 247, 0.94),
+      rgba(255, 255, 255, 0.78) 46%,
+      rgba(255, 255, 255, 0.14)
+    ),
+    url('./images/products/appliances.png') right center / auto 82% no-repeat,
     #f6f8f7;
   color: var(--ink);
   display: flex;
@@ -244,7 +251,11 @@ a {
   border-radius: 6px;
   font-weight: 700;
   border: 1px solid transparent;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .btn:hover {
@@ -347,7 +358,9 @@ a {
   opacity: 0;
   transform: translateX(34px);
   pointer-events: none;
-  transition: opacity 0.45s ease, transform 0.45s ease;
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease;
 }
 
 .business-slide.active {
@@ -383,7 +396,7 @@ a {
 }
 
 .slide-link::after {
-  content: "→";
+  content: '→';
 }
 
 .slide-link:hover::after {
@@ -439,7 +452,10 @@ a {
   color: var(--green-dark);
   font-size: 24px;
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .carousel-controls button:hover,
@@ -492,7 +508,10 @@ a {
   border-radius: 14px;
   background: var(--white);
   box-shadow: 0 8px 26px rgba(20, 51, 27, 0.05);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .modern-card {
@@ -537,7 +556,7 @@ a {
 }
 
 .solution-entry-grid a::after {
-  content: "→";
+  content: '→';
   color: var(--green);
 }
 
@@ -560,9 +579,7 @@ a {
   padding: 42px;
   border-radius: 18px;
   color: var(--ink);
-  background:
-    linear-gradient(135deg, #ffffff, #f2f5f3),
-    #ffffff;
+  background: linear-gradient(135deg, #ffffff, #f2f5f3), #ffffff;
   border: 1px solid var(--line);
 }
 
@@ -578,7 +595,7 @@ a {
 }
 
 .detail-hero {
-  padding: 82px 24px 70px;
+  padding: 56px 24px 70px;
   background:
     radial-gradient(circle at 78% 4%, rgba(16, 23, 19, 0.06), transparent 30%),
     linear-gradient(135deg, #ffffff, #f4f6f5);
@@ -601,7 +618,11 @@ a {
   color: var(--muted);
   font-size: 14px;
   font-weight: 700;
-  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    background 0.2s ease;
 }
 
 .back-link:hover {
@@ -730,7 +751,9 @@ a {
   background: var(--white);
   box-shadow: 0 28px 70px rgba(22, 54, 30, 0.16);
   transform-style: preserve-3d;
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
   cursor: zoom-in;
 }
 
@@ -773,7 +796,7 @@ a {
 
 .book-dots {
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   gap: 8px;
 }
 
@@ -957,7 +980,9 @@ h2 {
   font-size: 21px;
   line-height: 1.35;
 }
-
+.product-card p {
+  height: 50px;
+}
 .card p {
   margin: 0;
   color: var(--muted);
@@ -976,18 +1001,19 @@ h2 {
 
 .tag-list {
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   gap: 9px;
   margin-top: 20px;
 }
 
 .tag {
-  padding: 6px 10px;
+  padding: 5px 8px;
   border-radius: 6px;
   color: var(--green-dark);
   background: var(--green-soft);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
+  white-space: nowrap;
 }
 
 .feature-band {
@@ -1108,7 +1134,7 @@ h2 {
 }
 
 .page-hero {
-  padding: 96px 24px 76px;
+  padding: 42px 24px 42px;
   background:
     radial-gradient(circle at 80% 12%, rgba(16, 23, 19, 0.06), transparent 28%),
     linear-gradient(135deg, #ffffff, #f4f6f5);
@@ -1169,11 +1195,12 @@ h2 {
 }
 
 .qr-box {
-  width: 210px;
-  padding: 14px;
-  border-radius: 8px;
+  width: 160px;
+  border-radius: 6px;
+  padding: 0px;
   background: var(--white);
   border: 1px solid var(--line);
+  overflow: hidden;
 }
 
 .site-footer {
@@ -1195,7 +1222,6 @@ h2 {
   margin-bottom: 18px;
   padding: 8px;
   border-radius: 6px;
-  background: var(--white);
 }
 
 .footer-title {
@@ -1327,8 +1353,12 @@ h2 {
   .hero {
     min-height: 620px;
     background:
-      linear-gradient(180deg, rgba(246, 248, 247, 0.96), rgba(255, 255, 255, 0.82)),
-      url("./images/products/appliances.png") center bottom / 88% auto no-repeat,
+      linear-gradient(
+        180deg,
+        rgba(246, 248, 247, 0.96),
+        rgba(255, 255, 255, 0.82)
+      ),
+      url('./images/products/appliances.png') center bottom / 88% auto no-repeat,
       #f6f8f7;
     align-items: flex-start;
   }
@@ -1524,7 +1554,7 @@ h2 {
 }
 
 .card-link::after {
-  content: " →";
+  content: ' →';
   color: var(--green);
 }
 
