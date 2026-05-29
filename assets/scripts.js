@@ -166,6 +166,7 @@ document.querySelectorAll("[data-booklet]").forEach((booklet) => {
     preview.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
     previewClose?.focus();
+    resetZoom();
   };
 
   const closePreview = () => {
@@ -173,10 +174,83 @@ document.querySelectorAll("[data-booklet]").forEach((booklet) => {
     preview.classList.remove("open");
     preview.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
-    previewImage?.classList.remove("zoomed");
+    resetZoom();
     restart();
   };
 
+  // ---------- Zoom & Pan ----------
+  const previewStage = preview?.querySelector("[data-preview-stage]");
+  let isZoomed = false;
+  let isPanning = false;
+  let panStartX = 0;
+  let panStartY = 0;
+  let panX = 0;
+  let panY = 0;
+
+  const resetZoom = () => {
+    if (!previewImage) return;
+    isZoomed = false;
+    isPanning = false;
+    panX = 0;
+    panY = 0;
+    previewImage.classList.remove("zoomed", "dragging");
+    previewImage.style.transition = "";
+    previewImage.style.transform = "";
+    if (previewStage) previewStage.style.cursor = "zoom-in";
+  };
+
+  const toggleZoom = () => {
+    if (!previewImage) return;
+    isZoomed = !isZoomed;
+    panX = 0;
+    panY = 0;
+    previewImage.classList.add("zoomed-smooth");
+    previewImage.classList.toggle("zoomed", isZoomed);
+    previewImage.classList.remove("dragging");
+    if (isZoomed) {
+      previewImage.style.transform = "scale(2) translate(0px, 0px)";
+      if (previewStage) previewStage.style.cursor = "grab";
+    } else {
+      previewImage.style.transition = "";
+      previewImage.style.transform = "";
+      if (previewStage) previewStage.style.cursor = "zoom-in";
+    }
+    window.setTimeout(() => previewImage.classList.remove("zoomed-smooth"), 300);
+  };
+
+  // Mouse drag panning
+  let dragDist = 0;
+
+  const startPan = (clientX, clientY) => {
+    if (!isZoomed || !previewImage) return;
+    isPanning = true;
+    dragDist = 0;
+    panStartX = clientX - panX;
+    panStartY = clientY - panY;
+    previewImage.classList.add("dragging");
+    previewImage.style.transition = "none";
+    if (previewStage) previewStage.style.cursor = "grabbing";
+  };
+
+  const movePan = (clientX, clientY) => {
+    if (!isPanning || !previewImage) return;
+    const newPanX = clientX - panStartX;
+    const newPanY = clientY - panStartY;
+    dragDist += Math.abs(newPanX - panX) + Math.abs(newPanY - panY);
+    panX = newPanX;
+    panY = newPanY;
+    previewImage.style.transform = `scale(2) translate(${panX}px, ${panY}px)`;
+  };
+
+  const endPan = () => {
+    if (!isPanning || !previewImage) return;
+    isPanning = false;
+    previewImage.classList.remove("dragging");
+    previewImage.style.transition = "";
+    if (previewStage) previewStage.style.cursor = "grab";
+  };
+
+  // ---- Mouse events ----
   prev?.addEventListener("click", () => {
     show(index - 1);
     restart();
@@ -187,11 +261,91 @@ document.querySelectorAll("[data-booklet]").forEach((booklet) => {
   });
   pageImage.addEventListener("click", openPreview);
   previewClose?.addEventListener("click", closePreview);
-  preview?.addEventListener("click", (event) => {
+  preview?.addEventListener("mousedown", (event) => {
     if (event.target === preview) closePreview();
   });
-  previewImage?.addEventListener("click", () => {
-    previewImage.classList.toggle("zoomed");
+  previewImage?.addEventListener("click", (event) => {
+    if (dragDist > 8) return;
+    toggleZoom();
+  });
+  previewImage?.addEventListener("mousedown", (event) => {
+    if (isZoomed) {
+      event.preventDefault();
+      startPan(event.clientX, event.clientY);
+    }
+  });
+  document.addEventListener("mousemove", (event) => {
+    movePan(event.clientX, event.clientY);
+  });
+  document.addEventListener("mouseup", endPan);
+
+  // ---- Touch events ----
+  previewImage?.addEventListener("touchstart", (event) => {
+    if (isZoomed && event.touches.length === 1) {
+      const touch = event.touches[0];
+      startPan(touch.clientX, touch.clientY);
+    }
+  }, { passive: true });
+  document.addEventListener("touchmove", (event) => {
+    if (isPanning && event.touches.length === 1) {
+      const touch = event.touches[0];
+      movePan(touch.clientX, touch.clientY);
+    }
+  }, { passive: true });
+  document.addEventListener("touchend", endPan);
+
+  // ---- Mouse wheel zoom ----
+  previewImage?.addEventListener("wheel", (event) => {
+    event.preventDefault();
+    if (!previewImage) return;
+    const currentScale = isZoomed ? 2 : 1;
+    const delta = event.deltaY > 0 ? -0.3 : 0.3;
+    const newScale = Math.max(1, Math.min(4, currentScale + delta));
+    if (newScale === 1) {
+      resetZoom();
+    } else {
+      isZoomed = true;
+      previewImage.classList.add("zoomed");
+      if (previewStage) previewStage.style.cursor = "grab";
+      previewImage.style.transform = `scale(${newScale}) translate(${panX}px, ${panY}px)`;
+    }
+  }, { passive: false });
+
+  // ---- Navigate pages within preview ----
+  const previewPrev = preview?.querySelector("[data-preview-prev]");
+  const previewNext = preview?.querySelector("[data-preview-next]");
+
+  previewPrev?.addEventListener("click", (event) => {
+    event.stopPropagation();
+    show(index - 1);
+    stop();
+    if (preview?.classList.contains("open")) {
+      syncPreview();
+    }
+  });
+  previewNext?.addEventListener("click", (event) => {
+    event.stopPropagation();
+    show(index + 1);
+    stop();
+    if (preview?.classList.contains("open")) {
+      syncPreview();
+    }
+  });
+
+  // ---- Keyboard in preview ----
+  document.addEventListener("keydown", (event) => {
+    if (!preview?.classList.contains("open")) return;
+    if (event.key === "Escape") {
+      closePreview();
+    } else if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      show(index - 1);
+      syncPreview();
+    } else if (event.key === "ArrowRight") {
+      event.preventDefault();
+      show(index + 1);
+      syncPreview();
+    }
   });
   booklet.addEventListener("pointerenter", stop);
   booklet.addEventListener("pointerleave", start);
@@ -207,11 +361,6 @@ document.querySelectorAll("[data-booklet]").forEach((booklet) => {
     if (Math.abs(deltaX) > 45) {
       show(index + (deltaX < 0 ? 1 : -1));
       restart();
-    }
-  });
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && preview?.classList.contains("open")) {
-      closePreview();
     }
   });
 

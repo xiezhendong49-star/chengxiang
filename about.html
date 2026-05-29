@@ -40,7 +40,7 @@
         <div class="section-head">
           <div>
             <p class="section-kicker">Brand Booklet</p>
-            <h2>澄象在线品牌画册</h2>
+            <h2 style="font-size: 46px;">澄象在线品牌画册</h2>
             <p class="section-lead">公司简介、产品、团队和业务布局。</p>
           </div>
         </div>
@@ -79,10 +79,14 @@
 
     <div class="book-preview" data-book-preview aria-hidden="true">
       <button class="book-preview-close" type="button" data-book-preview-close aria-label="关闭预览">×</button>
+      <button class="book-preview-nav prev" type="button" data-preview-prev aria-label="上一页">‹</button>
+      <button class="book-preview-nav next" type="button" data-preview-next aria-label="下一页">›</button>
       <div class="book-preview-panel" role="dialog" aria-modal="true" aria-label="画册大图预览">
-        <img data-book-preview-image src="assets/images/booklet/page-1.jpg" alt="澄象在线品牌画册第 1 页">
+        <div class="book-preview-stage" data-preview-stage>
+          <img data-book-preview-image src="assets/images/booklet/page-1.jpg" alt="澄象在线品牌画册第 1 页">
+        </div>
       </div>
-      <div class="book-preview-caption">点击图片切换放大</div>
+      <div class="book-preview-caption"></div>
     </div>
 
     <section class="section" id="business-contact">
