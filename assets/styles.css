@@ -1948,3 +1948,146 @@ h2 {
     height: 20px;
   }
 }
+
+/* ===== 商家入驻按钮与弹出二维码 ===== */
+.cta-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.merchant-entry {
+  position: relative;
+}
+
+.merchant-btn {
+  white-space: nowrap;
+}
+
+.merchant-popup {
+  position: absolute;
+  bottom: calc(100% + 16px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  width: 220px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14);
+  padding: 18px 16px 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 110;
+}
+
+.merchant-popup.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* 下方小三角箭头（指向按钮） */
+.merchant-popup::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid #fff;
+}
+
+.merchant-popup-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.merchant-popup-close {
+  position: absolute;
+  top: -8px;
+  right: -6px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  background: var(--line);
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.merchant-popup-close:hover {
+  background: var(--green);
+  color: #fff;
+}
+
+.merchant-popup-header {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  text-align: center;
+  width: 100%;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.merchant-popup-inner img {
+  width: 140px;
+  height: 140px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  object-fit: cover;
+}
+
+.merchant-popup-tip {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* 弹窗遮罩 */
+.merchant-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 105;
+  background: transparent;
+  display: none;
+}
+
+.merchant-overlay.open {
+  display: block;
+}
+
+@media (max-width: 620px) {
+  .cta-actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .merchant-popup {
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    width: 200px;
+  }
+  .merchant-popup.open {
+    transform: translateX(-50%) translateY(0);
+  }
+  .merchant-popup-inner img {
+    width: 120px;
+    height: 120px;
+  }
+}
