@@ -1697,10 +1697,12 @@ h2 {
   .solution-grid,
   .news-grid,
   .value-grid,
-  .partner-strip,
+  .partner-strip {
+    grid-template-columns: 1fr;
+  }
   .logo-wall,
   .logo-wall.compact {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .logo-card {
