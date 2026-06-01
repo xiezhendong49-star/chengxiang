@@ -1812,7 +1812,128 @@ h2 {
   transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
 }
 
+/* ===== 商务咨询悬浮弹出面板 ===== */
+.floating-item-group {
+  position: relative;
+}
+
+.floating-popup {
+  position: absolute;
+  right: calc(100% + 16px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 320px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14);
+  padding: 18px 16px 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  transform: translateY(-50%) translateX(6px);
+}
+
+.floating-item-group:hover .floating-popup {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* 小三角箭头 */
+.floating-popup::after {
+  content: '';
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid #fff;
+}
+
+.popup-header {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  text-align: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 12px;
+}
+
+.popup-qr-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.popup-qr-box img {
+  width: 100%;
+  max-width: 110px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+}
+
+.popup-qr-box .popup-name {
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.popup-qr-box .popup-name strong {
+  display: block;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ===== 四产品二维码网格 ===== */
+.popup-qr-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.popup-qr-grid .popup-qr-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.popup-qr-grid .popup-qr-box img {
+  width: 100%;
+  max-width: 90px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+}
+
+.popup-qr-grid .popup-qr-box .popup-name {
+  font-size: 11px;
+  color: var(--ink);
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.2;
+}
+
 @media (max-width: 768px) {
+  .popup-qr-grid .popup-qr-box img {
+    max-width: 70px;
+  }
+}
+
+@media (max-width: 768px) {
+  .floating-popup {
+    width: 260px;
+    right: calc(100% + 10px);
+    padding: 14px 12px 10px;
+  }
+  .popup-qr-box img {
+    max-width: 90px;
+  }
   .floating-sidebar {
     right: 12px;
   }
