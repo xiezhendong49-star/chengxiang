@@ -1502,6 +1502,20 @@ h2 {
   .footer-grid {
     grid-template-columns: 1fr;
   }
+
+  /* ===== b-detail-hero 移动适配 ===== */
+  .b-detail-hero {
+    background-image:
+      var(--hero-bg), linear-gradient(to bottom, #fff 25%, transparent 65%) !important;
+    aspect-ratio: auto;
+    min-height: 420px;
+    background-size: cover;
+    background-position: center;
+  }
+  .b-detail-hero-grid {
+    width: 100%;
+    padding: 32px 24px;
+  }
 }
 
 @media (max-width: 620px) {
@@ -1680,6 +1694,17 @@ h2 {
   .footer-bottom {
     display: block;
   }
+
+  /* ===== b-detail-hero 手机端适配 ===== */
+  .b-detail-hero {
+    min-height: 380px;
+  }
+  .b-detail-hero-grid {
+    padding: 24px 18px;
+  }
+  .b-detail-hero-grid h1 {
+    font-size: 34px;
+  }
 }
 
 .solution-card,
@@ -1809,7 +1834,10 @@ h2 {
 }
 
 #back-to-top {
-  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
 }
 
 /* ===== 商务咨询悬浮弹出面板 ===== */
@@ -1829,7 +1857,9 @@ h2 {
   padding: 18px 16px 14px;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
   transform: translateY(-50%) translateX(6px);
 }
 
@@ -1977,7 +2007,9 @@ h2 {
   padding: 18px 16px 14px;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
   z-index: 110;
 }
 
@@ -2026,7 +2058,9 @@ h2 {
   align-items: center;
   justify-content: center;
   padding: 0;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
 }
 
 .merchant-popup-close:hover {
