@@ -1748,3 +1748,82 @@ h2 {
     align-items: flex-start;
   }
 }
+
+/* ===== 右侧悬浮侧边栏 ===== */
+.floating-sidebar {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.floating-item {
+  width: 72px;
+  height: 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(220, 230, 223, 0.7);
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--ink);
+  font-size: 11px;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  padding: 0;
+  font-family: inherit;
+}
+
+.floating-item svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  color: var(--green);
+  transition: color 0.25s ease;
+}
+
+.floating-item:hover {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(38, 143, 43, 0.25);
+  transform: scale(1.05);
+}
+
+.floating-item:hover svg {
+  color: #fff;
+}
+
+.floating-item:active {
+  transform: scale(0.97);
+}
+
+#back-to-top {
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+
+@media (max-width: 768px) {
+  .floating-sidebar {
+    right: 12px;
+  }
+  .floating-item {
+    width: 60px;
+    height: 60px;
+    font-size: 10px;
+    border-radius: 8px;
+  }
+  .floating-item svg {
+    width: 20px;
+    height: 20px;
+  }
+}

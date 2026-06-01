@@ -367,3 +367,13 @@ document.querySelectorAll("[data-booklet]").forEach((booklet) => {
   show(0);
   start();
 });
+
+// ===== 返回顶部 =====
+(function () {
+  const backToTop = document.getElementById("back-to-top");
+  if (!backToTop) return;
+
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+})();
