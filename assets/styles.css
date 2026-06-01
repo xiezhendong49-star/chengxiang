@@ -606,6 +606,11 @@ a {
   margin: 0 auto 24px;
 }
 
+.b-detail-hero-grid .detail-back {
+  align-self: start;
+  margin: 0 0 8px;
+}
+
 .back-link {
   display: inline-flex;
   align-items: center;
@@ -647,15 +652,16 @@ a {
   background-size: 100% 100%;
   aspect-ratio: 2;
   display: flex;
+  align-items: center;
 }
 .b-detail-hero-grid {
-  margin: auto;
   width: min(1200px, 100%);
   padding-left: 20px;
   margin: 0 auto;
   display: grid;
-  gap: 42px;
+  gap: 28px;
   align-items: center;
+  align-content: center;
 }
 
 .detail-hero h1 {
