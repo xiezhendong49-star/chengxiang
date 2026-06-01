@@ -1522,6 +1522,20 @@ h2 {
     width: 100%;
     padding: 32px 24px;
   }
+
+  /* ===== n-page-hero 移动适配 ===== */
+  .n-page-hero {
+    aspect-ratio: auto;
+    min-height: 360px;
+    background-size: cover;
+    background-position: center;
+  }
+  .n-page-hero .mask {
+    background-image: linear-gradient(to bottom, #fff 25%, transparent 70%);
+  }
+  .n-page-hero .container {
+    padding: 0 24px;
+  }
 }
 
 @media (max-width: 620px) {
@@ -1710,6 +1724,19 @@ h2 {
   }
   .b-detail-hero-grid h1 {
     font-size: 34px;
+  }
+
+  /* ===== n-page-hero 手机端适配 ===== */
+  .n-page-hero {
+    min-height: 300px;
+    padding: 0;
+  }
+  .n-page-hero .mask {
+    background-image: linear-gradient(to bottom, #fff 40%, transparent 80%);
+  }
+  .n-page-hero .container {
+    padding: 0 18px;
+    transform: translateY(-80px);
   }
 }
 
