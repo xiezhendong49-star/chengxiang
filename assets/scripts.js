@@ -48,10 +48,22 @@ document.querySelectorAll("[data-carousel]").forEach((carousel) => {
   })
 
   const show = (nextIndex) => {
+    const prevIndex = index
     index = (nextIndex + slides.length) % slides.length
-    slides.forEach((slide, slideIndex) => {
-      slide.classList.toggle("active", slideIndex === index)
-    })
+
+    // 当前 slide 向左滑出（exit）
+    const prevSlide = slides[prevIndex]
+    if (prevSlide && prevIndex !== index) {
+      prevSlide.classList.remove("active")
+      prevSlide.classList.add("exit")
+      // 动画结束后复位到右侧待命
+      setTimeout(() => prevSlide.classList.remove("exit"), 560)
+    }
+
+    // 新 slide 从右侧滑入
+    slides[index].classList.add("active")
+
+    // 更新 dots
     dots.forEach((dot, dotIndex) => {
       dot.classList.toggle("active", dotIndex === index)
     })
