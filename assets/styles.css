@@ -2281,8 +2281,13 @@ h2 {
   .hero-carousel-dots button.active {
     width: 26px;
   }
+}
 
-  .slide-index {
-    font-size: 13px;
-  }
+/* ===== 全屏静态背景图 ===== */
+.page-banner {
+  height: calc(100vh - 76px);
+  min-height: 600px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
