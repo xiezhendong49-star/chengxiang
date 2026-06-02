@@ -2291,3 +2291,70 @@ h2 {
   background-position: center;
   background-repeat: no-repeat;
 }
+
+/* ===== 产品中心横向子导航（始终显示） ===== */
+.nav-dropdown.always-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+  min-width: auto;
+  width: max-content;
+  padding: 6px 10px;
+  top: calc(100% + 32px);
+  box-shadow: 0 8px 24px rgba(16, 23, 19, 0.08);
+  border-radius: 8px;
+}
+
+.nav-dropdown.always-visible a {
+  padding: 5px 14px;
+  border-radius: 6px;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.nav-dropdown.always-visible a.active {
+  background: var(--green-soft);
+  color: var(--green-dark);
+  font-weight: 700;
+}
+
+.has-dropdown:hover .nav-dropdown.always-visible,
+.has-dropdown:focus-within .nav-dropdown.always-visible,
+.has-dropdown.open .nav-dropdown.always-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+
+/* 移动端适配 */
+@media (max-width: 980px) {
+  .nav-dropdown.always-visible {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 4px 0 8px 14px;
+    gap: 4px;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+    transform: none;
+  }
+
+  .nav-dropdown.always-visible a {
+    padding: 6px 12px;
+    font-size: 14px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--white);
+  }
+
+  .nav-dropdown.always-visible a.active {
+    border-color: var(--green);
+    background: var(--green-soft);
+  }
+}
