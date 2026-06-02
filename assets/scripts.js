@@ -47,21 +47,39 @@ document.querySelectorAll("[data-carousel]").forEach((carousel) => {
     return dot
   })
 
-  const show = (nextIndex) => {
+  const show = (nextIndex, direction = 1) => {
     const prevIndex = index
     index = (nextIndex + slides.length) % slides.length
 
-    // 当前 slide 向左滑出（exit）
     const prevSlide = slides[prevIndex]
+    const nextSlide = slides[index]
+
     if (prevSlide && prevIndex !== index) {
       prevSlide.classList.remove("active")
-      prevSlide.classList.add("exit")
-      // 动画结束后复位到右侧待命
-      setTimeout(() => prevSlide.classList.remove("exit"), 560)
+      prevSlide.classList.add(direction === -1 ? "exit-right" : "exit")
+      // 动画结束后，关闭过渡并复位到默认位置（右侧待命），避免下次切回时方向错乱
+      setTimeout(() => {
+        prevSlide.style.transition = "none"
+        prevSlide.classList.remove("exit", "exit-right")
+        void prevSlide.offsetHeight
+        prevSlide.style.transition = ""
+      }, 560)
     }
 
-    // 新 slide 从右侧滑入
-    slides[index].classList.add("active")
+    if (direction === -1) {
+      // 后退：新 slide 先定位到左侧（无过渡），再切换为 active（有过渡从左侧滑入）
+      nextSlide.classList.remove("active", "exit", "exit-right")
+      nextSlide.style.transition = "none"
+      nextSlide.classList.add("enter-left")
+      void nextSlide.offsetHeight
+      nextSlide.style.transition = ""
+      nextSlide.classList.remove("enter-left")
+      nextSlide.classList.add("active")
+    } else {
+      // 前进：新 slide 从右侧滑入（默认 translateX(100%) → active 的 translateX(0)）
+      nextSlide.classList.remove("exit", "exit-right", "enter-left")
+      nextSlide.classList.add("active")
+    }
 
     // 更新 dots
     dots.forEach((dot, dotIndex) => {
@@ -83,22 +101,21 @@ document.querySelectorAll("[data-carousel]").forEach((carousel) => {
   }
 
   prev?.addEventListener("click", () => {
-    show(index - 1)
+    show(index - 1, -1)
     restart()
   })
   next?.addEventListener("click", () => {
     show(index + 1)
     restart()
   })
-  carousel.addEventListener("pointerenter", stop)
-  carousel.addEventListener("pointerleave", start)
   carousel.addEventListener("touchstart", (event) => {
     touchStartX = event.touches[0].clientX
   }, { passive: true })
   carousel.addEventListener("touchend", (event) => {
     const deltaX = event.changedTouches[0].clientX - touchStartX
     if (Math.abs(deltaX) > 45) {
-      show(index + (deltaX < 0 ? 1 : -1))
+      const dir = deltaX < 0 ? 1 : -1
+      show(index + dir, dir)
       restart()
     }
   })

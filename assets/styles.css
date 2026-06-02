@@ -2195,6 +2195,18 @@ h2 {
   z-index: 1;
 }
 
+/* 后退方向：新 slide 从左侧进入 */
+.hero-slide.enter-left {
+  transform: translateX(-100%);
+  z-index: 1;
+}
+
+/* 后退方向：旧 slide 向右侧退出 */
+.hero-slide.exit-right {
+  transform: translateX(100%);
+  z-index: 1;
+}
+
 .hero-carousel-nav {
   position: absolute;
   left: 50%;
