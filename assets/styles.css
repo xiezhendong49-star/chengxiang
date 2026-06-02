@@ -1342,6 +1342,7 @@ h2 {
   margin-bottom: 18px;
   padding: 8px;
   border-radius: 6px;
+  filter: sepia(100%) grayscale(100%) brightness(200%);
 }
 
 .footer-title {
