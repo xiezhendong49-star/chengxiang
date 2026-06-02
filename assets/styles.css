@@ -2326,7 +2326,6 @@ h2 {
 .has-dropdown.open .nav-dropdown.always-visible {
   opacity: 1;
   pointer-events: auto;
-  transform: translate(-50%, 0);
 }
 
 /* 移动端适配 */
