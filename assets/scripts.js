@@ -418,44 +418,44 @@ const CX_FLOATING_CONFIG = {
   const groups = document.querySelectorAll(".floating-item-group[data-popup]")
   if (!groups.length) return
 
-// ===== 商家入驻弹出二维码 =====
-(function () {
-  var overlays = document.querySelectorAll(".merchant-overlay")
-  var overlay
+  // ===== 商家入驻弹出二维码 =====
+  (function () {
+    var overlays = document.querySelectorAll(".merchant-overlay")
+    var overlay
 
-  if (!overlays.length) {
-    overlay = document.createElement("div")
-    overlay.className = "merchant-overlay"
-    document.body.appendChild(overlay)
-  } else {
-    overlay = overlays[0]
-  }
+    if (!overlays.length) {
+      overlay = document.createElement("div")
+      overlay.className = "merchant-overlay"
+      document.body.appendChild(overlay)
+    } else {
+      overlay = overlays[0]
+    }
 
-  document.querySelectorAll(".merchant-btn").forEach(function (btn) {
-    btn.addEventListener("click", function (e) {
-      e.stopPropagation()
-      var popup = this.parentNode.querySelector(".merchant-popup")
-      if (!popup) return
-      var isOpen = popup.classList.toggle("open")
-      overlay.classList.toggle("open", isOpen)
+    document.querySelectorAll(".merchant-btn").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation()
+        var popup = this.parentNode.querySelector(".merchant-popup")
+        if (!popup) return
+        var isOpen = popup.classList.toggle("open")
+        overlay.classList.toggle("open", isOpen)
+      })
     })
-  })
 
-  overlay.addEventListener("click", function () {
-    document.querySelectorAll(".merchant-popup.open").forEach(function (p) {
-      p.classList.remove("open")
-    })
-    overlay.classList.remove("open")
-  })
-
-  document.querySelectorAll(".merchant-popup-close").forEach(function (closeBtn) {
-    closeBtn.addEventListener("click", function () {
-      var popup = this.closest(".merchant-popup")
-      if (popup) popup.classList.remove("open")
+    overlay.addEventListener("click", function () {
+      document.querySelectorAll(".merchant-popup.open").forEach(function (p) {
+        p.classList.remove("open")
+      })
       overlay.classList.remove("open")
     })
-  })
-})()
+
+    document.querySelectorAll(".merchant-popup-close").forEach(function (closeBtn) {
+      closeBtn.addEventListener("click", function () {
+        var popup = this.closest(".merchant-popup")
+        if (popup) popup.classList.remove("open")
+        overlay.classList.remove("open")
+      })
+    })
+  })()
 
   groups.forEach(function (group) {
     const key = group.getAttribute("data-popup")

@@ -1581,7 +1581,6 @@ h2 {
     bottom: 22px;
   }
 
-  .business-grid,
   .solution-entry-grid,
   .detail-grid,
   .process-row {
@@ -2164,8 +2163,10 @@ h2 {
 /* ===== 满屏轮播 Hero Carousel ===== */
 .hero-carousel {
   position: relative;
-  height: calc(100vh - 76px);
-  min-height: 600px;
+  /* height: calc(100vh - 100px); */
+  aspect-ratio: 2.7;
+  max-width: 100%;
+  /* min-height: 600px; */
   overflow: hidden;
   background: #101713;
 }
@@ -2250,36 +2251,31 @@ h2 {
 }
 
 /* ===== 满屏轮播响应式 ===== */
-@media (max-width: 980px) {
+/* @media (max-width: 980px) {
   .hero-carousel {
     min-height: 520px;
   }
-}
+} */
 
 @media (max-width: 620px) {
-  .hero-carousel {
-    height: 100vh;
-    min-height: 480px;
-  }
-
   .hero-carousel-nav {
     bottom: 24px;
     gap: 12px;
   }
-
   .hero-carousel-nav button {
     width: 36px;
     height: 36px;
     font-size: 22px;
   }
-
   .hero-carousel-dots button {
     width: 8px;
     height: 8px;
   }
-
   .hero-carousel-dots button.active {
     width: 26px;
+  }
+  .section-head h2 {
+    font-size: 22px;
   }
 }
 
@@ -2299,6 +2295,19 @@ h2 {
     width: 100%;
     aspect-ratio: 1.8;
   }
+  .modern-card {
+    min-height: unset;
+  }
+  .modern-card {
+    padding: 12px;
+  }
+  .modern-card h3 {
+    font-size: 18px;
+    margin: 10px 0 5px;
+  }
+  .feature-media img {
+    margin: 0 auto !important;
+  }
 }
 
 /* ===== 产品中心横向子导航（始终显示） ===== */
@@ -2315,6 +2324,12 @@ h2 {
   top: calc(100% + 32px);
   box-shadow: 0 8px 24px rgba(16, 23, 19, 0.08);
   border-radius: 8px;
+  z-index: 29;
+  opacity: 0.7;
+  transition: opacity 0.25s ease;
+}
+.nav-dropdown.always-visible:hover {
+  opacity: 1;
 }
 
 .nav-dropdown.always-visible a {
