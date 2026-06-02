@@ -2292,6 +2292,15 @@ h2 {
   background-repeat: no-repeat;
 }
 
+@media (max-width: 620px) {
+  .page-banner {
+    height: auto;
+    min-height: unset;
+    width: 100%;
+    aspect-ratio: 1.8;
+  }
+}
+
 /* ===== 产品中心横向子导航（始终显示） ===== */
 .nav-dropdown.always-visible {
   opacity: 1;
